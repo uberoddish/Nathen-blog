@@ -12,7 +12,7 @@ from functools import wraps
 import os
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = os.environ.get("SECRET_KEY")
+app.config['SECRET_KEY'] = os.environ.get("SECRET_KEY", "8BYkEfBA606donzWlSihBXox7C0sKR6b")
 ckeditor = CKEditor(app)
 Bootstrap(app)
 
@@ -77,7 +77,7 @@ class Comment(db.Model):
     parent_post = relationship("BlogPost", back_populates='comments')
 
 
-# db.create_all()
+db.create_all()
 
 @login_manager.user_loader
 def load_user(user_id):
