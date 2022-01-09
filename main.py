@@ -68,7 +68,7 @@ class User(UserMixin, db.Model):
     comments = relationship('Comment', back_populates="comment_author")
 
 class Comment(db.Model):
-    __tablename__="comment"
+    __tablename__ = "comment"
     id = db.Column(db.Integer, primary_key=True)
     text = db.Column(db.Text(250), nullable=False)
     author_id = db.Column(db.Integer, db.ForeignKey('users.id'))
