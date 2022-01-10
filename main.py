@@ -68,9 +68,9 @@ class User(UserMixin, db.Model):
     comments = relationship('Comment', back_populates="comment_author")
 
 class Comment(db.Model):
-    __tablename__ = "comment"
+    __tablename__ = "comments"
     id = db.Column(db.Integer, primary_key=True)
-    text = db.Column(db.Text(250), nullable=False)
+    text = db.Column(db.Text, nullable=False)
     author_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     comment_author = relationship("User", back_populates='comments')
     post_id = db.Column(db.Integer, db.ForeignKey('blog_posts.id'))
@@ -167,7 +167,7 @@ def show_post(post_id):
 
         else:
             new_comment = Comment(
-                text=request.form.get('comment'),
+                text=form.comment_text.data,
                 comment_author=current_user,
                 parent_post=requested_post
             )
